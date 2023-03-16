@@ -28,7 +28,7 @@ class Expense(models.Model):
     modified = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.category
+        return str(self.category)
 
 
 class Income(models.Model):
