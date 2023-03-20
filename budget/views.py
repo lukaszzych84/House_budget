@@ -76,3 +76,6 @@ def calculate(request):
     else:
         categories = ExpenseCategory.objects.all()
         return render(request, 'budget/calculate.html', context={'categories': categories})
+
+def base(request):
+    return render(request, template_name='budget/base.html')
