@@ -1,5 +1,6 @@
-{% extends 'budget/base.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
   <h1>{{ welcome_message }}</h1>
+    <a href="{% url 'calculate' %}" class="btn btn-primary">Add Task</a>
 {% endblock %}

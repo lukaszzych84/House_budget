@@ -4,6 +4,7 @@ from .models import ExpenseCategory, IncomeCategory, Expense
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, authenticate
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.contrib import messages
 
@@ -49,22 +50,23 @@ def login_view(request):
             # obsługa błędnego logowania
             pass
     else:
-        return render(request, 'budget/login.html')
+        form = AuthenticationForm()
+        return render(request, 'budget/login.html', context={'form': form})
 
 
 def logout_view(request):
     logout(request)
     return redirect('login')  # przekierowanie na stronę logowania
-
+@login_required(login_url='login')
 def calculate(request):
     if request.method == 'POST':
         amount = request.POST.get('amount')
         category_id = request.POST.get('category')
         description = request.POST.get('description')
         if amount and category_id and description:
-            amount=float(amount)
-            # category= ExpenseCategory.objects.get(id=category_id)
-            category= get_object_or_404(ExpenseCategory, id=category_id)
+            amount = float(amount)
+            # category=  ExpenseCategory.objects.get(id=category_id)
+            category = get_object_or_404(ExpenseCategory, id=category_id)
             Expense.objects.create(
                 user=request.user,
                 amount=amount,
@@ -78,4 +80,4 @@ def calculate(request):
         return render(request, 'budget/calculate.html', context={'categories': categories})
 
 def base(request):
-    return render(request, template_name='budget/base.html')
+    return render(request, template_name='base.html')
