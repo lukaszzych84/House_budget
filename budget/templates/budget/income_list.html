@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+{% for income in income_list %}
+    <div class="card" style="width: 18rem;">
+  <div class="card-header">
+    {{ income.category.name }}
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">{{ income.description }}</li>
+    <li class="list-group-item">{{ income.amount }}</li>
+    <li class="list-group-item">{{ income.date }}</li>
+  </ul>
+</div>
+              <br></br>
+
+
+
+    {% endfor %}
+{% endblock %}

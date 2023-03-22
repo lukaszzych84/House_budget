@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% for message in messages %}
+    {{message}}
+{% endfor %}
+<form method="post">{% csrf_token %}
+
+    <input type="number" step="0.01" name="amount" required>
+    <select name="category" required>
+        {% for category in categories %}
+            <option value="{{category.id}}">{{category.name}}</option>
+        {% endfor %}
+    </select>
+    <input type="text" name="description" required>
+    <input type="submit" value="dodaj">
+
+</form>
+</body>
+</html>
+{% endblock %}

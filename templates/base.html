@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>BabyPlan {% block title %}{% endblock %}</title>
+    <title>House budget {% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'style/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'style/main.css' %}">
     <script src="{% static 'scripts/bootstrap.bundle.min.js' %}" async defer></script>
@@ -17,6 +17,7 @@
 
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <img src="{% static 'images/logo.png' %}" class="logo" alt="logo" width="1000px" height="1000px">
     <a class="navbar-brand" href="{% url 'home' %}">Strona Główna</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

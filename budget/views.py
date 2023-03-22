@@ -1,6 +1,10 @@
 from pyexpat.errors import messages
+
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils import timezone
-from .models import ExpenseCategory, IncomeCategory, Expense
+from django.views.generic import ListView
+
+from .models import ExpenseCategory, IncomeCategory, Expense, Income
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, authenticate
@@ -79,5 +83,54 @@ def calculate(request):
         categories = ExpenseCategory.objects.all()
         return render(request, 'budget/calculate.html', context={'categories': categories})
 
-def base(request):
-    return render(request, template_name='base.html')
+@login_required(login_url='login')
+def gift(request):
+        if request.method == 'POST':
+            amount = request.POST.get('amount')
+            category_id = request.POST.get('category')
+            description = request.POST.get('description')
+            if amount and category_id and description:
+                amount = float(amount)
+                # category=  ExpenseCategory.objects.get(id=category_id)
+                category = get_object_or_404(IncomeCategory, id=category_id)
+                Income.objects.create(
+                    user=request.user,
+                    amount=amount,
+                    category=category,
+                    description=description
+                )
+                messages.success(request, "Dodano pomyślnie")
+                return redirect('gift')
+        else:
+            categories = IncomeCategory.objects.all()
+            return render(request, 'budget/gift.html', context={'categories': categories})
+
+class ExpanseListView(LoginRequiredMixin, ListView):
+    model = Expense
+    template_name = 'budget/expanse_list.html'
+    login_url = 'login'
+
+class IncomeistView(LoginRequiredMixin, ListView):
+    model = Income
+    template_name = 'budget/income_list.html'
+    login_url = 'login'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# def base(request):
+#     return render(request, template_name='base.html')
