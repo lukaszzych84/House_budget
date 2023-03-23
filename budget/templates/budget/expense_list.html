@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+{% for expense in expense_list %}
+    <div class="card" style="width: 18rem;">
+  <div class="card-header">
+    {{ expense.category.name }}
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">{{ expense.description }}</li>
+    <li class="list-group-item">{{ expense.amount }}</li>
+    <li class="list-group-item">{{ expense.date }}</li>
+     <form method="post" action="{% url 'expense_delete' expense.id %}">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Usuń</button>
+</form>
+      <form method="post" action="{% url 'expense_edit' expense.pk %}">
+        {% csrf_token %}
+    <button type="submit" class="btn btn-light">Edytuj</button>
+</form>
+  </ul>
+</div>
+              <br></br>
+
+
+
+    {% endfor %}
+{% endblock %}

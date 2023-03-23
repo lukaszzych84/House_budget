@@ -1,8 +1,9 @@
 from pyexpat.errors import messages
 
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
 from django.utils import timezone
-from django.views.generic import ListView
+from django.views.generic import ListView, UpdateView
 
 from .models import ExpenseCategory, IncomeCategory, Expense, Income
 from django.shortcuts import render, redirect, get_object_or_404
@@ -36,7 +37,7 @@ def register(request):
             password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=password)
             login(request, user)
-            return redirect('home')
+            return redirect('login')
     else:
         form = UserCreationForm()
     return render(request, 'budget/register.html', {'form': form})
@@ -107,30 +108,46 @@ def gift(request):
 
 class ExpanseListView(LoginRequiredMixin, ListView):
     model = Expense
-    template_name = 'budget/expanse_list.html'
+    template_name = 'budget/expense_list.html'
     login_url = 'login'
 
-class IncomeistView(LoginRequiredMixin, ListView):
+class IncomeListView(LoginRequiredMixin, ListView):
     model = Income
     template_name = 'budget/income_list.html'
     login_url = 'login'
+@login_required
+def delete_income(request, income_id):
+    income = Income.objects.get(id=income_id)
+    income.delete()
+    messages.success(request, f'Przychód został usunięty!')
+    return redirect('income')
+@login_required
+def delete_expense(request, expense_id, ):
+    expanse = Expense.objects.get(id=expense_id)
+    expanse.delete()
+    messages.success(request, f'Wydatek został usunięty!')
+    return redirect('expense')
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+class IncomeUpdateView(LoginRequiredMixin, UpdateView):
+    model = Income
+    template_name = 'budget/income_edit.html'
+    login_url = 'login'
+    fields = ('description', 'amount')
+    success_url = reverse_lazy('income')
+    def get_object(self, queryset=None):
+        obj = super().get_object(queryset=queryset)
+        return obj
+    # def get_initial(self):
+    #     initial = super().get_initial()
+    #     initial['description'] = self.object.description
+    #     initial['amount'] = self.object.amount
+    #     return initial
+class ExpenseUpdateView(LoginRequiredMixin, UpdateView):
+    model = Expense
+    template_name = 'budget/expense_edit.html'
+    login_url = 'login'
+    fields = ('description', 'amount')
+    success_url = reverse_lazy('expense')
 
 # def base(request):
 #     return render(request, template_name='base.html')

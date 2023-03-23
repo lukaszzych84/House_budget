@@ -1,4 +1,15 @@
 .logo {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
+}
+
+.body {
+  background-image:url(/img/tlo/castle2.jpg);
+  background-repeat:no-repeat;
+  background-size: cover;
+  background-position:center;
+  background-attachment:fixed;
+  height:100%;
+  width:100%;
+  color: rgba(255, 255, 255, 0.94);
 }

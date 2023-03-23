@@ -9,6 +9,14 @@
     <li class="list-group-item">{{ income.description }}</li>
     <li class="list-group-item">{{ income.amount }}</li>
     <li class="list-group-item">{{ income.date }}</li>
+           <form method="post" action="{% url 'income_delete' income.id %}">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Usuń</button>
+</form>
+      <form method="post" action="{% url 'income_edit' income.pk %}">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-light">Edytuj</button>
+</form>
   </ul>
 </div>
               <br></br>
