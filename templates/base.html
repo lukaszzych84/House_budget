@@ -7,14 +7,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>House budget {% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'style/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'style/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'style/main.css' %}">
     <script src="{% static 'scripts/bootstrap.bundle.min.js' %}" async defer></script>
 
 
 </head>
 
-<body>
-<link rel="stylesheet" href="{% static 'main.css' %}">
+<body rel="stylesheet" type="text/css" href="{% static 'style/main.css' %}">
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <img src="{% static 'images/logo.png' %}" height="100" width="100">
@@ -46,13 +45,15 @@
     </div>
 </nav>
 
-<div
-        class="container mt-4">
+<div>
+        <link rel="style" type="css" href="{% static 'style/main.css' %}">
+
     {% block content %}
     {% endblock %}
 
 </div>
-<div style="background-image: url('{% static 'images/tlo.jpg' %}');">
+
+
 
 
 </body>
