@@ -1,10 +1,10 @@
 from pyexpat.errors import messages
-
+from django.http import HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.utils import timezone
 from django.views.generic import ListView, UpdateView
-
+from django.db.models import Sum
 from .models import ExpenseCategory, IncomeCategory, Expense, Income
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
@@ -49,11 +49,12 @@ def login_view(request):
         password = request.POST['password']
         user = authenticate(request, username=username, password=password)
         if user is not None:
-            login(request, user)
+            if user.is_active:
+                login(request, user)
             return redirect('home')
         else:
-            # obsługa błędnego logowania
-            pass
+            return HttpResponse(request, 'Nieprawidłowe dane.')
+
     else:
         form = AuthenticationForm()
         return render(request, 'budget/login.html', context={'form': form})
@@ -111,10 +112,23 @@ class ExpanseListView(LoginRequiredMixin, ListView):
     template_name = 'budget/expense_list.html'
     login_url = 'login'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['sum_of_expenses'] = Expense.objects.aggregate(Sum('amount'))['amount__sum'] or 0
+        return context
+
 class IncomeListView(LoginRequiredMixin, ListView):
     model = Income
     template_name = 'budget/income_list.html'
     login_url = 'login'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['sum_of_incomes'] = Income.objects.aggregate(Sum('amount'))['amount__sum']
+        return context
+
+
+
 @login_required
 def delete_income(request, income_id):
     income = Income.objects.get(id=income_id)

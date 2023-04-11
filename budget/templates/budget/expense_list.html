@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+{% load static %}
+
 {% block content %}
 {% for expense in expense_list %}
     <div class="card" style="width: 18rem;">
@@ -24,4 +26,8 @@
 
 
     {% endfor %}
+<p class="total-expenses">Suma wydatków: {{ sum_of_expenses }} PLN</p>
+
+
 {% endblock %}
+
