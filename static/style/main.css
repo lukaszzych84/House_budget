@@ -4,7 +4,7 @@
 }
 
 body {
-  background-image: url("/static/images/tlo.jpg");
+  background-image: url("/static/images/kalkulator.jpg");
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -17,4 +17,46 @@ body {
     font-style: italic;
     font-size: 50px;
     text-align: center;
+}
+form {
+  /* dodaj styl tła z obrazkiem */
+  background-image: url("static/images/przychody.jpeg");
+  background-size: cover; /* dopasuj rozmiar obrazka do formularza */
+    background-position: center;
+    background-repeat: no-repeat;
+  max-width: 500px;
+  margin: 40px;
+  padding: 50px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #ccc;
+   position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+input[type="number"], select, input[type="text"] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+}
+
+input[type="submit"] {
+    background-color: black;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049;
 }

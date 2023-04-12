@@ -1,28 +1,37 @@
 {% extends 'base.html' %}
+
 {% block content %}
-{% for income in income_list %}
-    <div class="card" style="width: 18rem;">
-  <div class="card-header">
-    {{ income.category.name }}
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <h2>Lista przychodów</h2>
+      {% for income in income_list %}
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">{{ income.category.name }}</h5>
+          <p class="card-text">{{ income.description }}</p>
+          <p class="card-text">Kwota: {{ income.amount }} PLN</p>
+          <p class="card-text"><small class="text-muted">{{ income.date }}</small></p>
+          <div class="d-flex justify-content-end">
+            <form method="post" action="{% url 'income_edit' income.pk %}">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-light">Edytuj</button>
+            </form>
+            <form method="post" action="{% url 'income_delete' income.id %}">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-danger ml-2">Usuń</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <p class="list-group-item">Brak przychodów do wyświetlenia.</p>
+      {% endfor %}
+    </div>
+    <div class="col-md-4">
+      <h2>Podsumowanie</h2>
+      <p class="total-expenses">Suma przychodów: {{ sum_of_incomes }} PLN</p>
+    </div>
   </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">{{ income.description }}</li>
-    <li class="list-group-item">{{ income.amount }}</li>
-    <li class="list-group-item">{{ income.date }}</li>
-           <form method="post" action="{% url 'income_delete' income.id %}">
-    {% csrf_token %}
-    <button type="submit" class="btn btn-danger">Usuń</button>
-</form>
-      <form method="post" action="{% url 'income_edit' income.pk %}">
-    {% csrf_token %}
-    <button type="submit" class="btn btn-light">Edytuj</button>
-</form>
-  </ul>
 </div>
-              <br></br>
-
-
-
-    {% endfor %}
-     <p class="total-expenses">Suma przychodów: {{ sum_of_incomes }} PLN</p>
 {% endblock %}
