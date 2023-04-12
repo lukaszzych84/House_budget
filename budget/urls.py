@@ -14,10 +14,11 @@ urlpatterns = [
     path('income/<int:income_id>/delete/', views.delete_income, name='income_delete'),
     path('expense/<int:expense_id>/delete/', views.delete_expense, name='expense_delete'),
     path('expense/<int:pk>/update/', views.ExpenseUpdateView.as_view(), name='expense_edit'),
-    path('income/<int:pk>/update/', views.IncomeUpdateView.as_view(), name='income_edit')
+    path('income/<int:pk>/update/', views.IncomeUpdateView.as_view(), name='income_edit'),
+    path('about/', views.about, name='about')
 
 
 
 
-    # path('base/', views.base)
+    # path('base/', views.base),
 ]

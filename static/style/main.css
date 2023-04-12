@@ -1,6 +1,6 @@
 .logo {
-    width: 50px;
-    height: 50px;
+    width: 30px;
+    height: 30px;
 }
 
 body {
@@ -59,4 +59,29 @@ input[type="submit"] {
 
 input[type="submit"]:hover {
     background-color: #45a049;
+}
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  padding: 0;
+  margin-right: 10px;
+  height: 70%;
+  background-image: url('static/images/Free_Sample_By_Wix.jpg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: left center;
+}
+
+.navbar-brand img {
+  max-height: 80%;
+}
+
+.navbar {
+  height: 120px;
+}
+
+
+.app-description {
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 20px;
 }

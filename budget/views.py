@@ -165,3 +165,6 @@ class ExpenseUpdateView(LoginRequiredMixin, UpdateView):
 
 # def base(request):
 #     return render(request, template_name='base.html')
+
+def about(request):
+    return render(request, 'budget/about.html')

@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<head>
+  <style>
+    .app-description {
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 20px;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<style>
+  body {
+    background-image: url('/static/images/about1.jpg');
+    background-size: cover;
+    opacity: 0.8;
+  }
+</style>
+
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="card my-4">
+        <h5 class="card-header">O aplikacji</h5>
+        <div class="card-body">
+          <div class="app-description" style="background-color: rgba(255, 255, 255, 0.8);">
+            <h2>Twoja Aplikacja do Zarządzania Budżetem</h2>
+            <p>Twoja Aplikacja do Zarządzania Budżetem to idealne narzędzie dla każdego, kto chce kontrolować swoje finanse w sposób wygodny i przejrzysty. Dzięki naszej aplikacji możesz w łatwy sposób dodawać swoje przychody i wydatki, a następnie przeglądać je w czytelny sposób w postaci listy.</p>
+            <p>W Twojej Aplikacji do Zarządzania Budżetem możesz dodawać dowolną liczbę kategorii wydatków, co pozwala na jeszcze dokładniejszą kontrolę nad swoimi finansami. Dodatkowo, nasza aplikacja pozwala na dodawanie przypisów do każdego wydatku lub przychodu, co ułatwia identyfikację i późniejsze wyszukiwanie transakcji.</p>
+            <p>Kolejne funkcjonalności Twojej Aplikacji do Zarządzania Budżetem będą wprowadzane w nieodległej przyszłości, aby jeszcze bardziej ułatwić Ci kontrolowanie swoich finansów i pomóc w osiągnięciu swoich celów finansowych.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
