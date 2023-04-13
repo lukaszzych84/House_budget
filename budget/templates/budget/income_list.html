@@ -1,32 +1,65 @@
 {% extends 'base.html' %}
 
+{% block extra_head %}
+<style>
+  .card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+
+  .card-title {
+    margin-bottom: 10px;
+    font-size: 20px;
+  }
+
+  .card-text {
+    margin-bottom: 5px;
+  }
+
+  .btn-light {
+    background-color: #f1f1f1;
+  }
+
+  .btn-danger {
+    background-color: #dc3545;
+    color: #fff;
+  }
+
+  .total-expenses {
+    background-color: #f1f1f1;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-size: 18px;
+  }
+</style>
+{% endblock %}
+
 {% block content %}
 <div class="container">
   <div class="row">
     <div class="col-md-8">
       <h2>Lista przychodów</h2>
-      {% for income in income_list %}
-      <div class="card mb-3">
-        <div class="card-body">
-          <h5 class="card-title">{{ income.category.name }}</h5>
-          <p class="card-text">{{ income.description }}</p>
-          <p class="card-text">Kwota: {{ income.amount }} PLN</p>
-          <p class="card-text"><small class="text-muted">{{ income.date }}</small></p>
-          <div class="d-flex justify-content-end">
-            <form method="post" action="{% url 'income_edit' income.pk %}">
-              {% csrf_token %}
-              <button type="submit" class="btn btn-light">Edytuj</button>
-            </form>
-            <form method="post" action="{% url 'income_delete' income.id %}">
-              {% csrf_token %}
-              <button type="submit" class="btn btn-danger ml-2">Usuń</button>
-            </form>
-          </div>
-        </div>
-      </div>
-      {% empty %}
-      <p class="list-group-item">Brak przychodów do wyświetlenia.</p>
-      {% endfor %}
+     {% for income in income_list %}
+  <div class="card mb-3">
+    <div class="card-body">
+      <h5 class="card-title">{{ income.category.name }}</h5>
+      <p class="card-text">{{ income.description }}</p>
+      <p class="card-text">Kwota: {{ income.amount }} PLN</p>
+      <p class="card-text"><small class="text-muted">{{ income.date }}</small></p>
+    </div>
+<div class="card-footer d-flex justify-content-end">
+     {% csrf_token %}
+  <a href="{% url 'income_edit' income.pk %}" class="btn btn-light">Edytuj</a>
+  <a href="{% url 'income_delete' income.pk %}" class="btn btn-danger">Usuń</a>
+</div>
+</div>
+
+{% empty %}
+  <p class="list-group-item">Brak przychodów do wyświetlenia.</p>
+{% endfor %}
+
     </div>
     <div class="col-md-4">
       <h2>Podsumowanie</h2>

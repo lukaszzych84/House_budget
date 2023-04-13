@@ -85,3 +85,29 @@ input[type="submit"]:hover {
   background-color: rgba(255, 255, 255, 0.8);
   padding: 20px;
 }
+
+.card-footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  border-top: none;
+}
+
+.card-footer form {
+  margin-left: 10px;
+}
+
+.add-button {
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 0.25rem;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 0;
+  cursor: pointer;
+}

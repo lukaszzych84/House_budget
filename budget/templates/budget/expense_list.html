@@ -1,33 +1,67 @@
 {% extends 'base.html' %}
-{% load static %}
 
-{% block content %}
-{% for expense in expense_list %}
-    <div class="card" style="width: 18rem;">
-  <div class="card-header">
-    {{ expense.category.name }}
-  </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">{{ expense.description }}</li>
-    <li class="list-group-item">{{ expense.amount }}</li>
-    <li class="list-group-item">{{ expense.date }}</li>
-     <form method="post" action="{% url 'expense_delete' expense.id %}">
-    {% csrf_token %}
-    <button type="submit" class="btn btn-danger">Usuń</button>
-</form>
-      <form method="post" action="{% url 'expense_edit' expense.pk %}">
-        {% csrf_token %}
-    <button type="submit" class="btn btn-light">Edytuj</button>
-</form>
-  </ul>
-</div>
-              <br></br>
+{% block extra_head %}
+<style>
+  .card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
 
+  .card-header {
+    font-size: 20px;
+  }
 
+  .card-text {
+    margin-bottom: 5px;
+  }
 
-    {% endfor %}
-<p class="total-expenses">Suma wydatków: {{ sum_of_expenses }} PLN</p>
+  .btn-light {
+    background-color: #f1f1f1;
+  }
 
+  .btn-danger {
+    background-color: #dc3545;
+    color: #fff;
+  }
 
+  .total-expenses {
+    background-color: #f1f1f1;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-size: 18px;
+  }
+</style>
 {% endblock %}
 
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <h2>Lista wydatków</h2>
+      {% for expense in expense_list %}
+      <div class="card mb-3">
+        <div class="card-header">{{ expense.category.name }}</div>
+        <div class="card-body">
+          <p class="card-text">{{ expense.description }}</p>
+          <p class="card-text">Kwota: {{ expense.amount }} PLN</p>
+          <p class="card-text"><small class="text-muted">{{ expense.date }}</small></p>
+        </div>
+        <div class="card-footer d-flex justify-content-end">
+             {% csrf_token %}
+          <a href="{% url 'expense_edit' expense.pk %}" class="btn btn-light">Edytuj</a>
+          <a href="{% url 'expense_delete' expense.pk %}" class="btn btn-danger">Usuń</a>
+        </div>
+      </div>
+      {% empty %}
+      <p class="list-group-item">Brak wydatków do wyświetlenia.</p>
+      {% endfor %}
+    </div>
+    <div class="col-md-4">
+      <h2>Podsumowanie</h2>
+      <p class="total-expenses">Suma wydatków: {{ sum_of_expenses }} PLN</p>
+    </div>
+  </div>
+</div>
+{% endblock %}
