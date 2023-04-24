@@ -2,36 +2,75 @@
 
 {% block extra_head %}
 <style>
-  .card {
-    border: 1px solid #ccc;
-    border-radius: 5px;
+.card {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 2px rgba(0,0,0,.1);
+  background-color: lightslategrey;
+}
+
+.card-header {
+  font-size: 24px;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 16px;
+  background-color: dimgrey;
+  border-radius: 5px 5px 0 0;
+}
+
+.card-body {
+  padding: 16px;
+}
+
+.card-text {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.btn-light {
+  background-color: #eee;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 8px 16px;
+  margin-right: 10px;
+  font-size: 16px;
+}
+
+.btn-danger {
+  background-color: #e74c3c;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 16px;
+  font-size: 16px;
+}
+
+.total-expenses {
+    background-color: #cd1010;
+    padding: 20px;
+    border-color: #0dcaf0;
+    border-radius: 10px;
     margin-bottom: 20px;
+    font-size: 24px;
+    box-shadow: 0 0 10px #171313;
+    outline: none;
   }
 
-  .card-header {
-    font-size: 20px;
+  /* styl dla tekstu sumy wydatków */
+.total-expenses span {
+    font-size: 36px;
+    font-weight: bold;
+    color: #4CAF50;
   }
 
-  .card-text {
-    margin-bottom: 5px;
-  }
-
-  .btn-light {
-    background-color: #f1f1f1;
-  }
-
-  .btn-danger {
-    background-color: #dc3545;
-    color: #fff;
-  }
-
-  .total-expenses {
-    background-color: #f1f1f1;
-    padding: 10px;
-    border-radius: 5px;
-    margin-bottom: 20px;
+  /* styl dla jednostki walutowej */
+.total-expenses small {
     font-size: 18px;
-  }
+    color: #999;
+}
 </style>
 {% endblock %}
 
